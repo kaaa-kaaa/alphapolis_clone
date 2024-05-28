@@ -10,4 +10,4 @@ class Member extends Model
     use HasFactory;
 }
 
-// かに
+// かにえび
