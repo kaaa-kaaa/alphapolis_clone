@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('genre__series', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('genre_id')
+                ->constrained('genres');
+            $table->foreignId('series_id')
+                ->constrained('series');
+
             $table->timestamps();
         });
     }
