@@ -44,6 +44,10 @@ class Member extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function series(){
+        return $this ->hasMany(Series::class);
+    }
 }
 
 // かにえび

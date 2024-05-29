@@ -1,4 +1,5 @@
 <h2>エピソード一覧</h2>
+<a href="/index">トップページへ</a>
 
 @if ($episodes->count() > 0)
     <table border="1">

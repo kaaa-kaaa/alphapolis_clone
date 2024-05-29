@@ -1,10 +1,7 @@
 <h2>エピソード閲覧</h2>
+<a href="/index">トップページへ</a>
 
-<table border="1">
-    <tr>
-        <th>エピソード名</th>
-        <td>{{ $episodes->subtitle }}</td>
-    </tr>
-</table>
+<h3>{{ $episodes->subtitle }}</h3>
+<h4>{{ $episodes->series->member->name}}</h4>
 
-{{ $episodes->episode_text }}
+<p>{{ $episodes->episode_text }}</p>

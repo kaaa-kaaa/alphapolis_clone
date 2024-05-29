@@ -1,4 +1,5 @@
 <h2>検索</h2>
+<a href="/index">トップページへ</a>
 
 <div>
     <form action="/search" method="post">

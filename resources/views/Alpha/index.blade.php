@@ -3,7 +3,9 @@
 <a href="/login">ログイン</a>
 <a href="/register">会員登録</a>
 <a href="/myspage">マイページ</a>
+<a href="/logout">ログアウト</a>
 <a href="/search">検索</a>
+
 
 @if ($series->count() > 0)
     <table border="1">
