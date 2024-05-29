@@ -17,10 +17,14 @@ return new class extends Migration
             $table->foreignId('series_id')
                 ->constrained('series');  // 関連づけるテーブル名を指定する(※先にteams テーブルを作成しておく必要がある)
 
-            $table->string('subtittle');
+            $table->string('subtitle');
             $table->text('episode_text');
-            $table->string('cover_image_path');
+            $table->string('cover_image_path')
+                ->nullable()
+                ->default(null);
             $table->boolean('is_release');
+            $table->bigInteger('like')
+            ->default(0);
             $table->timestamps();
         });
     }
