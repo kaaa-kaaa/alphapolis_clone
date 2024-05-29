@@ -9,6 +9,12 @@ class Series extends Model
 {
     use HasFactory;
 
+       /* episodes テーブルとのリレーション設定 */
+        public function episodes(){
+
+            return $this->hasMany(Episode::class);
+        }
+
     public function episode(){
         return $this ->hasMany(Episode::class);
     }
