@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Series extends Model
 {
     use HasFactory;
+
+    public function episode(){
+        return $this ->hasMany(Episode::class);
+    }
+
+    public function member(){
+        return $this ->belongsTo(Member::class);
+    }
+
+    public function genre(){
+        return $this ->belongsToMany(Genre::class);
+    }
 }
