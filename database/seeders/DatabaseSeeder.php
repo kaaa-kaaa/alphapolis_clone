@@ -22,6 +22,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             GenreSeeder::class,
+            MemberSeeder::class,
+            SeriesSeeder::class,
+            EpisodeSeeder::class,
+            GenreSeriesSeeder::class,
+
+
         ]);
     }
 }

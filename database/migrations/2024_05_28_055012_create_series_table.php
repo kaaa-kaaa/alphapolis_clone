@@ -17,13 +17,15 @@ return new class extends Migration
             $table->foreignId('member_id')
                 ->constrained('members');
 
-            $table->foreignId('genre_id')
-                ->constrained('genres');
-
             $table->string('title');
             $table->text('abstract');
-            $table->string('cover_image_path');
-            $table->bigInteger('evaluation');
+            $table->string('cover_image_path')
+                ->nullable()
+                ->default(null);
+
+            $table->bigInteger('evaluation')
+                ->default(0);
+
             $table->timestamps();
         });
     }
