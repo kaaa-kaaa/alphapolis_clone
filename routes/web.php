@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\MypageEpisodeController;
+
+use App\Http\Controllers\AlphaController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,9 +24,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/mypage', function(){
-    print("マイページ");
-});
 
 Route::get('/mypage/{member_id}/{series_id}/createEpisode', [MypageEpisodeController::class, 'showCreatingEpisodePage']);
 Route::post('/mypage/{member_id}/{series_id}/createEpisode', [MypageEpisodeController::class, 'createEpisode']);
@@ -34,13 +35,9 @@ Route::get('/mypage/{member_id}/edit/{episode_id}', [MypageEpisodeController::cl
 Route::post('/mypage/{member_id}/edit/{episode_id}', [MypageEpisodeController::class, 'editEpisode']);
 
 
-
-
-
-
-
-
-
-
-
+Route::get('/index', [AlphaController::class, 'index'])->name('index');
+Route::get('/read/{series_id}', [AlphaController::class, 'readSeries']);
+Route::get('/read/{series_id}/{episode_id}', [AlphaController::class, 'readEpisodes']);
+Route::get('/search', [AlphaController::class, 'showSearchingPage']);
+Route::post('/search', [AlphaController::class, 'search']);
 
