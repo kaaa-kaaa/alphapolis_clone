@@ -11,6 +11,7 @@
     <table border="1">
         <tr>
             <th>シリーズ名</th>
+            <th>著者</th>
         </tr>
         {{-- @foreach ディレクティブで、1件ずつ処理 --}}
         @foreach ($series as $novel)

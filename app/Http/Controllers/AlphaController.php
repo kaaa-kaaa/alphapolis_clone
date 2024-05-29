@@ -20,7 +20,8 @@ class AlphaController extends Controller
     public function readSeries($s_id)
     {
         $episodes = Episode::where('series_id', $s_id)->get();
-        return view('Alpha.readSeries', compact('episodes'));
+        $episode = Episode::where('series_id', $s_id)->first();
+        return view('Alpha.readSeries', compact('episodes','episode'));
     }
 
     public function readEpisodes($id, $e_id)
@@ -41,6 +42,7 @@ class AlphaController extends Controller
         $keyword = $request->input('keyword');
         if (!empty($keyword)) {
             $series = Series::where('title', 'LIKE', "%{$keyword}%")->select('id','title')->get();
+
         }
         return view('Alpha.search', compact('series'));
     }

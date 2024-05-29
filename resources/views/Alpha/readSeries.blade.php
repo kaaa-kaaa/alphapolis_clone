@@ -1,6 +1,8 @@
 <h2>エピソード一覧</h2>
 <a href="/index">トップページへ</a>
 
+<h3>{{ $episode->series->title }}</h3>
+
 @if ($episodes->count() > 0)
     <table border="1">
         <tr>
