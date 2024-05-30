@@ -12,18 +12,21 @@
         <tr>
             <th>シリーズ名</th>
             <th>著者</th>
-        </trš
+            <th>ジャンル</th>
+        </tr>
         {{-- @foreach ディレクティブで、1件ずつ処理 --}}
-        @foreach ($series as $novel){
+        @foreach ($series as $novel)
             <tr>
                 <td><a href="/read/{{ $novel->id }}">{{ $novel->title }}</a></td>
-                {{-- <td>{{$novel->$members->name}}</td> --}}
-                {{ var_dump($novel->members)}}
-                {{-- @foreach($novel){
-                    <td> {{ $novel->members->name }}</td>}
-                @endforeach --}}
+                <td>{{ $novel->member->name }}</td>
+                {{-- @dd($novel->genres) --}}
+                <td>
+                    @foreach ($novel->genres as $genre)
+                        {{ $genre->name }}<br>
+                    @endforeach
+                </td>
+                {{-- <td>{{ $novel->pivot->genres->name }}</td> --}}
             </tr>
-        }
         @endforeach
     </table>
 @else

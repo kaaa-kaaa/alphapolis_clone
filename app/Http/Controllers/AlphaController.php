@@ -26,7 +26,6 @@ class AlphaController extends Controller
 
     public function readEpisodes($id, $e_id)
     {
-        //dd($e_id);
         $episodes = Episode::find($e_id);
         return view('Alpha.readEpisodes', compact('episodes'));
     }

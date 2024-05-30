@@ -15,7 +15,7 @@ class Series extends Model
         return $this->hasMany(Episode::class);
     }
 
-    public function members(){
+    public function member(){
         return $this->belongsTo(Member::class);
     }
 
