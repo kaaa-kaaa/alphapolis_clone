@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/mypage/{member_id}/createSeries',[mypageSeriesController::class, 'createSeries']);
 
     //edit
-    Route::post('/mypage/{member_id}/editSeries/{series_id}',[mypageSeriesController::class, 'showSeriesEditingPage'])->name('editSeries');
+    Route::get('/mypage/{member_id}/editSeries/{series_id}',[mypageSeriesController::class, 'showSeriesEditingPage'])->name('editSeries');
     Route::post('/mypage/{member_id}/editSeries/{series_id}',[mypageSeriesController::class, 'editSeries']);
 });
 

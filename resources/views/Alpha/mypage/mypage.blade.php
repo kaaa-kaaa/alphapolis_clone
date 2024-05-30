@@ -28,7 +28,7 @@
             <tbody>
                 @foreach ($member->series as $novel )
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th class="px-6 text-large font-medium text-black whitespace-nowrap dark:text-white"><a href="/mypage/{{$member->id}}/editSeries/{{$novel->id}}" class="inline-flex items-center text-sm font-light text-blue-600 dark:text-blue-500 underline">{{$novel->title}}</a></th>
+                    <th class="px-6 text-large font-medium text-black whitespace-nowrap dark:text-white"><a href="/mypage/{{$member->id}}/{{$novel->id}}" class="inline-flex items-center text-sm font-light text-blue-600 dark:text-blue-500 underline">{{$novel->title}}</a></th>
                 </tr>
                 <tr>
                     <td class="px-6">評価：{{$novel->evaluation}}</td>

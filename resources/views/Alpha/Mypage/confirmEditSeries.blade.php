@@ -1,6 +1,6 @@
 <x-mypageWrap>
     <div class='text-center mx-auto mb-[50px] mt-[20px]'>
-        <h1 class='block text-xl text-amber-600 dark:text-gray-300 underline'>基本情報の確認</h1>
+        <h1 class='block text-xl text-amber-600 dark:text-gray-300 underline'>編集内容の確認</h1>
     </div>
 
     <div class="max-w-sm mx-auto">
@@ -15,7 +15,7 @@
         </div>
         <p class="mb-1 text-amber-600">表紙画像：</p>
         @if($file_path == null)
-            <p>なし</p>
+            <p>変更しない</p>
         @else
             <p class="text-gray-700 mb-[30px]">{{$file_path}}</p>
             <img src="{{asset(session('img_path'))}}" alt="">
@@ -27,6 +27,7 @@
             <form action="" method="POST">
                 @csrf
                 <input type="hidden" value="{{$request->member_id}}" name="member_id">
+                <input type="hidden" value="{{$request->series_id}}" name="series_id">
                 <input type="hidden" value="{{$request->title}}" name="title">
                 <input type="hidden" value="{{$request->abst}}" name="abst">
                 @foreach ($request->genres as $genre)

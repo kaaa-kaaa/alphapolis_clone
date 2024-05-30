@@ -39,7 +39,6 @@ class mypageSeriesController extends Controller
     }
 
     public function createSeries(Request $request){
-        /* バリデーションを実施する */
         if($request->has('create')){
             //dd($request);
 
@@ -100,6 +99,8 @@ class mypageSeriesController extends Controller
                 $new_genres = new Genre_Series();
                 $new_genres->genre_id = $genre;
                 $new_genres->series_id = $now_series->id;
+
+                $new_genres->save();
             }
 
             /* 完了画面を表示する */
@@ -110,10 +111,105 @@ class mypageSeriesController extends Controller
     }
 
     public function showSeriesEditingPage($member_id, $series_id){
-        return view('Alpha.Mypage.createSeries', compact('member_id'));
+        $current_id = Auth::id();
+
+        //member本人のシリーズか否か
+        $frag = false;
+        $member = Member::find($member_id);
+        foreach ($member->series as $novel ){
+            if($novel->id == $series_id){
+                $frag = true;
+                break;
+            }
+        }
+
+        if($current_id == $member_id){
+            if($frag == true){
+                $series=Series::find($series_id);
+                $genres=Genre::all();
+                return view('Alpha.Mypage.series_edit', compact('member_id','genres','series'));
+            }else{
+                return view('Alpha.Mypage.validateUser');
+            }
+        }else{
+            return view('Alpha.Mypage.validateUser');
+        }
     }
 
     public function editSeries(Request $request){
+        if($request->has('edit')){
+            //dd($request);
 
+            $validate = $request -> validate( [
+                /* name 欄を 必須項目、2文字以上、100文字以内で形式判定する */
+                'title' => ['required', 'min:2', 'max:100'],
+                'abst' => ['required', 'max:2000'],
+                'genres' => ['required']
+            ]);
+
+            if ($request->has('back')){
+                /* withInput() で、現在の入力内容をリダイレクトのリクエストに付加する */
+                $url = '/mypage/'. $request->member_id. '/editSeries/'. $request->series_id;
+                return redirect($url)->withInput();
+            }
+
+            $creGenres = [];
+            foreach($request->genres as $genre){
+                $genre_name=Genre::find($genre);
+                array_push($creGenres,$genre_name->name);
+            }
+
+            $file = $request->file('cover_image_path');
+            if($file == null){
+                $file_path=null;
+            }else{
+                $file_path = $file->store('public/images/series_cover_image');
+                Session::put('img_path', str_replace('public', 'storage', $file_path));
+            }
+
+            return view('Alpha.Mypage.confirmEditSeries', compact('request', 'creGenres', 'file_path'));
+        }
+
+        if ($request->has('backCreate')){
+            /* withInput() で、現在の入力内容をリダイレクトのリクエストに付加する */
+            $url = '/mypage/'. $request->member_id. '/editSeries/'. $request->series_id;
+            return redirect($url)->withInput();
+        }
+
+        if ($request->has('confirm')) {
+            //dd($request);
+            $series = Series::find($request->series_id);
+
+            //dd($new_series);
+
+            /* リクエストで渡された値を設定する */
+            $series->member_id = $request->member_id;
+            $series->title = $request->title;
+            $series->abstract = $request->abst;
+            if($request->cover_image_path != null){
+                $series->cover_image_path = $request->cover_image_path;
+            }
+
+            /* データベースに保存 */
+            $series->save();
+
+            $now_series=Series::select('id')->where('member_id',$request->member_id)->latest()->first();
+
+            //一旦ジャンルシリーズ中間テーブル削除してもっかい入れる
+            $db_data = new Genre_Series;
+            $db_data->where('series_id', $request->series_id)->delete();
+
+            foreach($request->genres as $genre){
+                $new_genres = new Genre_Series();
+                $new_genres->genre_id = $genre;
+                $new_genres->series_id = $now_series->id;
+
+                $new_genres->save();
+            }
+
+            /* 完了画面を表示する */
+            $url = '/mypage/'. $request->member_id. '/'. $request->series_id;
+            return redirect($url);
+        }
     }
 }
