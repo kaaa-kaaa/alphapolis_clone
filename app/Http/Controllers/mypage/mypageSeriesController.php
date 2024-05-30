@@ -10,6 +10,7 @@ use App\Models\Member;
 use App\Models\Series;
 use App\Models\Genre;
 use Illuminate\Support\Facades\Session;
+use App\Models\Genre_Series;
 
 class mypageSeriesController extends Controller
 {
@@ -93,11 +94,17 @@ class mypageSeriesController extends Controller
             /* データベースに保存 */
             $new_series->save();
 
-            $now_series=Series::select('id')->where('member_id',$request->member_id)->latest()->limit(1)->get();
-            //dd($now_series);
+            $now_series=Series::select('id')->where('member_id',$request->member_id)->latest()->first();
+
+            foreach($request->genres as $genre){
+                $new_genres = new Genre_Series();
+                $new_genres->genre_id = $genre;
+                $new_genres->series_id = $now_series->id;
+            }
 
             /* 完了画面を表示する */
-            return redirect('/ContactForm/complete');
+            $url = '/mypage/'. $request->member_id. '/'. $now_series->id. '/createEpisode';
+            return redirect($url);
         }
 
     }
