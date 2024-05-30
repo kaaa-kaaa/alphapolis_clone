@@ -1,6 +1,6 @@
 <x-mypageWrap>
     <div class='text-center mx-auto'>
-        <h1 class='block text-lg text-amber-600 dark:text-gray-300 mb-[20px] underline mt-[15px]'>マイページ</h1>
+        <h1 class='block text-xl text-amber-600 dark:text-gray-300 mb-[20px] underline mt-[15px]'>マイページ</h1>
 
         <div>
             <p>ようこそ{{$member->name}}さん</p>
