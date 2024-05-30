@@ -53,3 +53,13 @@
 
     <input type="submit" value="ここを押すと適応されます。">
 </form>
+
+{{-- <form action="/mypage/{{$member->id}}/editEpisode/{{$episode->id}}" method="post"> --}}
+<form action="/mypage/{{$member->id}}/editEpisode/{{$episode->id}}/confirm" method="post">
+    @csrf
+    <input type="hidden" name="series_id" value="{{$series->id}}">
+    <input type="hidden" name="member_id" value="{{$member->id}}">
+    <input type="hidden" name="episode_id" value="{{$episode->id}}">
+
+    <input type="submit"  name="delete" value="削除">
+</form>
