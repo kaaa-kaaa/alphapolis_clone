@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Series;
 use App\Models\Episode;
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class AlphaController extends Controller
@@ -26,7 +27,7 @@ class AlphaController extends Controller
             return view('Alpha.notFound');
         }
         else{
-            return view('Alpha.readSeries', compact('episodes','episode'));
+            return view('Alpha.readSeries', compact('episodes','episode', 'series'));
             }
     }
 
@@ -65,6 +66,19 @@ class AlphaController extends Controller
 
         }
         return view('Alpha.search', compact('series'));
+    }
+
+    public function memberSeries($m_id)
+    {
+        $series = Series::where('member_id', $m_id)->get();
+        $series_s = Series::where('member_id', $m_id)->first();
+        $member = Member::find($m_id);
+        if(is_null($member)){
+            return view('Alpha.notFound');
+        }
+        else{
+            return view('Alpha.memberSeries', compact('series', 'series_s', 'member'));
+        }
     }
 
     /**

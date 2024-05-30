@@ -54,3 +54,4 @@ Route::get('/read/{series_id}/{episode_id}', [AlphaController::class, 'readEpiso
 Route::get('/search', [AlphaController::class, 'showSearchingPage']);
 Route::post('/search', [AlphaController::class, 'search']);
 Route::get('/notfound', [AlphaController::class, 'notFoundS']);
+Route::get('/index/{member_id}', [AlphaController::class, 'memberSeries']);
