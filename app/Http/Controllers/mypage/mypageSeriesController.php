@@ -97,6 +97,7 @@ class mypageSeriesController extends Controller
             $now_series=Series::select('id')->where('member_id',$request->member_id)->latest()->first();
 
             foreach($request->genres as $genre){
+
                 $new_genres = new Genre_Series();
                 $new_genres->genre_id = $genre;
                 $new_genres->series_id = $now_series->id;
