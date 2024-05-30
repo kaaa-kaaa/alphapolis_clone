@@ -10,20 +10,16 @@ class Series extends Model
     use HasFactory;
 
        /* episodes テーブルとのリレーション設定 */
-        public function episodes(){
 
-            return $this->hasMany(Episode::class);
-        }
-
-    public function episode(){
-        return $this ->hasMany(Episode::class);
+    public function episodes(){
+        return $this->hasMany(Episode::class);
     }
 
-    public function member(){
-        return $this ->belongsTo(Member::class);
+    public function members(){
+        return $this->belongsTo(Member::class);
     }
 
-    public function genre(){
-        return $this ->belongsToMany(Genre::class);
+    public function genres(){
+        return $this->belongsToMany(Genre::class);
     }
 }
