@@ -1,3 +1,4 @@
+
 <h3>{{$member->name}}のページ</h3>
 
 
@@ -5,7 +6,7 @@
 
 @if ($series->episodes->count() > 0)
 
-<h3>{{$series->title}}のエピソード</h3>
+<h3>{{$series->title}}のエピソード<span>　　　　<a href="/mypage/{{$member->id}}/editSeries/{{$series->id}}">小説の基本情報を変更する</a></span></h3>
 <a href="/mypage/{{$member->id}}/{{$series->id}}/createEpisode">新しいエピソードを作成する</a>
 <table border="1">
     <tr>
@@ -28,3 +29,5 @@
 @else
     <p>無</p>
 @endif
+
+
