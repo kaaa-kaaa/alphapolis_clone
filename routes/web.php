@@ -25,14 +25,13 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-Route::get('/mypage/{member_id}/{series_id}/createEpisode', [MypageEpisodeController::class, 'showCreatingEpisodePage']);
-Route::post('/mypage/{member_id}/{series_id}/createEpisode', [MypageEpisodeController::class, 'createEpisode']);
-
-
-Route::get('/mypage/{member_id}/{series_id}', [MypageEpisodeController::class, 'showEpisodeList']);
-
-Route::get('/mypage/{member_id}/editEpisode/{episode_id}', [MypageEpisodeController::class, 'showEpisodeEditingPage']);
-Route::post('/mypage/{member_id}/editEpisode/{episode_id}', [MypageEpisodeController::class, 'editEpisode']);
+Route::get('/mypage/{member_id}/{series_id}/createEpisode', [MypageEpisodeController::class, 'showCreatingEpisodePage'])->middleware('auth');
+Route::post('/mypage/{member_id}/{series_id}/createEpisode', [MypageEpisodeController::class, 'createEpisode'])->middleware('auth');
+Route::get('/mypage/{member_id}/{series_id}', [MypageEpisodeController::class, 'showEpisodeList'])->middleware('auth');
+Route::get('/mypage/{member_id}/editEpisode/{episode_id}', [MypageEpisodeController::class, 'showEpisodeEditingPage'])->middleware('auth');
+Route::post('/mypage/{member_id}/editEpisode/{episode_id}', [MypageEpisodeController::class, 'editEpisode'])->middleware('auth');
+Route::post('/mypage/{member_id}/editEpisode/{episode_id}/confirm', [MypageEpisodeController::class, 'deleteConfirm'])->middleware('auth');
+Route::post('/mypage/{member_id}/editEpisode/{episode_id}/delete', [MypageEpisodeController::class, 'deleteEpisode'])->middleware('auth');
 
 
 Route::get('/index', [AlphaController::class, 'index'])->name('index');

@@ -10,7 +10,6 @@
 <table border="1">
     <tr>
         <th>サブタイトル</th>
-        <th>本文</th>
         <th>作成日時</th>
         <th>更新日時</th>
         <th>編集</th>
@@ -18,8 +17,7 @@
     {{-- @foreach ディレクティブで、1件ずつ処理 --}}
     @foreach ($series->episodes as $episode)
         <tr>
-            <td>{{ $episode->subtitle }}</td>
-            <td><a href="#">会員じゃなくても誰でも見れるエピソード本文ページへのリンク</a></td>
+            <td><a href="/read/{{$series->id}}/{{ $episode->id }}">{{ $episode->subtitle }}</a></td>
             <td>{{ $episode->created_at }}</td>
             <td>{{ $episode->updated_at }}</td>
             <td><a href="/mypage/{{$member->id}}/editEpisode/{{ $episode->id }}">編集</a></td>
