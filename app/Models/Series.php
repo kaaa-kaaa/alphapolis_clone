@@ -9,7 +9,20 @@ class Series extends Model
 {
     use HasFactory;
 
-    public function member() {
-        return $this->belongsTo(Member::class);
+    /* episodes テーブルとのリレーション設定 */
+    public function episodes(){
+        return $this->hasMany(Episode::class);
+    }
+
+    public function episode(){
+        return $this ->hasMany(Episode::class);
+    }
+
+    public function member(){
+        return $this ->belongsTo(Member::class);
+    }
+
+    public function genre(){
+        return $this ->belongsToMany(Genre::class);
     }
 }
