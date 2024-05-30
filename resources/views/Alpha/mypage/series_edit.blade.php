@@ -1,2 +1,0 @@
-<x-mypageWrap>
-</x-mypageWrap>
