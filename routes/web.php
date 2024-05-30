@@ -40,4 +40,4 @@ Route::get('/read/{series_id}', [AlphaController::class, 'readSeries']);
 Route::get('/read/{series_id}/{episode_id}', [AlphaController::class, 'readEpisodes']);
 Route::get('/search', [AlphaController::class, 'showSearchingPage']);
 Route::post('/search', [AlphaController::class, 'search']);
-
+Route::get('/notfound', [AlphaController::class, 'notFoundS']);

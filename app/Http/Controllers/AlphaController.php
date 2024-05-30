@@ -19,16 +19,36 @@ class AlphaController extends Controller
 
     public function readSeries($s_id)
     {
-        $episodes = Episode::where('series_id', $s_id)->get();
+        $episodes = Episode::where('series_id', $s_id)->where('is_release', TRUE)->get();
         $episode = Episode::where('series_id', $s_id)->first();
-        return view('Alpha.readSeries', compact('episodes','episode'));
+        $series = Series::find($s_id);
+        if(is_null($series)){
+            return view('Alpha.notFound');
+        }
+        else{
+            return view('Alpha.readSeries', compact('episodes','episode'));
+            }
     }
 
-    public function readEpisodes($id, $e_id)
+    public function readEpisodes($s_id, $e_id)
     {
-        //dd($e_id);
         $episodes = Episode::find($e_id);
-        return view('Alpha.readEpisodes', compact('episodes'));
+        if(is_null($episodes)){
+            return view('Alpha.notFound');
+        }
+        else{
+            if($episodes->series->id != $s_id){
+                return view('Alpha.notFound');
+            }
+            else{
+                if($episodes->is_release== TRUE){
+                    return view('Alpha.readEpisodes', compact('episodes'));
+                }
+                else{
+                    return view('Alpha.notFound');
+                }
+            }
+        }
     }
 
     public function showSearchingPage()
