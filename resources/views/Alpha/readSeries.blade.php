@@ -4,6 +4,7 @@
 <h3>{{ $episode->series->title }}</h3>
 <h4>著：{{ $episode->series->member->name }}</h4>
 <p>{{ $episode->series->abstract }}</p>
+{{ $episode->series->cover_image_path}}
 
 @if ($episodes->count() > 0)
     <table border="1">
