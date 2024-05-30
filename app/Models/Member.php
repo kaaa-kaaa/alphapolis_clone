@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Member extends Model
 {
     use HasFactory;
+
+    public function series() {
+        return $this->hasMany(Series::class);
+    }
 }
 
 // かにえび
