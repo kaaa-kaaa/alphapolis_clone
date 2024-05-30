@@ -1,4 +1,4 @@
-<h2>検索</h2>
+<h2>{{ $member->name }}のシリーズ一覧</h2>
 <a href="/index">トップページ</a>
 
 @guest
@@ -11,25 +11,25 @@
 @endauth
 <a href="/search">検索ページ</a>
 
-<div>
-    <form action="/search" method="post">
-    @csrf
-        <input type="text" name="keyword">
-        <input type="submit" value="検索">
-    </form>
-</div>
 
 @if ($series->count() > 0)
-{{-- <p>{{$series}}</p> --}}
     <table border="1">
         <tr>
             <th>シリーズ名</th>
+            <th>ジャンル</th>
         </tr>
         {{-- @foreach ディレクティブで、1件ずつ処理 --}}
         @foreach ($series as $novel)
+        @if ($novel->episodes->count() > 0)
             <tr>
                 <td><a href="/read/{{ $novel->id }}">{{ $novel->title }}</a></td>
+                <td>
+                    @foreach ($novel->genres as $genre)
+                        {{ $genre->name }}<br>
+                    @endforeach
+                </td>
             </tr>
+        @endif
         @endforeach
     </table>
 @else

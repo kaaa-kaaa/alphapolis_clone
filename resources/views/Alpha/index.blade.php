@@ -8,7 +8,7 @@
     <a href="/mypage">マイページ</a>
     <a href="/logout">ログアウト</a>
 @endauth
-<a href="/search">検索</a>
+<a href="/search">検索ページ</a>
 
 
 @if ($series->count() > 0)
@@ -20,9 +20,10 @@
         </tr>
         {{-- @foreach ディレクティブで、1件ずつ処理 --}}
         @foreach ($series as $novel)
+        @if ($novel->episodes->count() > 0)
             <tr>
                 <td><a href="/read/{{ $novel->id }}">{{ $novel->title }}</a></td>
-                <td>{{ $novel->member->name }}</td>
+                <td><a href="/index/{{ $novel->member_id }}">{{ $novel->member->name }}</a></td>
                 {{-- @dd($novel->genres) --}}
                 <td>
                     @foreach ($novel->genres as $genre)
@@ -31,6 +32,7 @@
                 </td>
                 {{-- <td>{{ $novel->pivot->genres->name }}</td> --}}
             </tr>
+        @endif
         @endforeach
     </table>
 @else
