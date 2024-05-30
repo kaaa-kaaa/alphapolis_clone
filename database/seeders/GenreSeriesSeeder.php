@@ -15,7 +15,7 @@ class GenreSeriesSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('genre__series')->insert(
+        DB::table('genre_series')->insert(
             [
                 ['genre_id' => 1, 'series_id' => 1],
                 ['genre_id' => 9, 'series_id' => 2],
