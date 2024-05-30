@@ -31,8 +31,8 @@ Route::post('/mypage/{member_id}/{series_id}/createEpisode', [MypageEpisodeContr
 
 Route::get('/mypage/{member_id}/{series_id}', [MypageEpisodeController::class, 'showEpisodeList']);
 
-Route::get('/mypage/{member_id}/edit/{episode_id}', [MypageEpisodeController::class, 'showEpisodeEditingPage']);
-Route::post('/mypage/{member_id}/edit/{episode_id}', [MypageEpisodeController::class, 'editEpisode']);
+Route::get('/mypage/{member_id}/editEpisode/{episode_id}', [MypageEpisodeController::class, 'showEpisodeEditingPage']);
+Route::post('/mypage/{member_id}/editEpisode/{episode_id}', [MypageEpisodeController::class, 'editEpisode']);
 
 
 Route::get('/index', [AlphaController::class, 'index'])->name('index');

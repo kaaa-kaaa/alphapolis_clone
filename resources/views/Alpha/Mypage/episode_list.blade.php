@@ -22,7 +22,7 @@
             <td><a href="#">会員じゃなくても誰でも見れるエピソード本文ページへのリンク</a></td>
             <td>{{ $episode->created_at }}</td>
             <td>{{ $episode->updated_at }}</td>
-            <td><a href="/mypage/{{$member->id}}/edit/{{ $episode->id }}">編集</a></td>
+            <td><a href="/mypage/{{$member->id}}/editEpisode/{{ $episode->id }}">編集</a></td>
         </tr>
     @endforeach
 </table>

@@ -6,7 +6,7 @@
 <h2>小説タイトル：{{$series->title}}</h2>
 
 
-<form action="/mypage/{{$member->id}}/edit/{{$episode->id}}" method="post">
+<form action="/mypage/{{$member->id}}/editEpisode/{{$episode->id}}" method="post">
     @csrf
 
     <div>
