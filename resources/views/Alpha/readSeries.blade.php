@@ -14,8 +14,23 @@
 <img src="{{ asset(session('img_path')) }}" width="200px" height="auto" alt="{{ $series->title }}の表紙画像">
 
 @if ($episodes->count() > 0)
+
+    <form action="{{route('bookMark')}}" method="post">
+        @csrf
+        <input type="hidden" name="series_id" value="{{$series->id}}">
+        <input type="submit" value="ブックマークする">
+    </form>
+    <form action="{{route('removeBookMark')}}" method="post">
+        @csrf
+        <input type="hidden" name="series_id" value="{{$series->id}}">
+        <input type="submit" value="ブックマークを外す">
+    </form>
+
     <h4>著：{{ $episode->series->member->name }}</h4>
+
+    <h4>紹介</h4>
     <p>{{ $episode->series->abstract }}</p>
+    <h4>ジャンル</h4>
     @foreach ($episode->series->genres as $genre)
         {{ $genre->name }}　
     @endforeach

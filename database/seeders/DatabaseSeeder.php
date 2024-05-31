@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             SeriesSeeder::class,
             EpisodeSeeder::class,
             GenreSeriesSeeder::class,
-
+            MemberSeriesSeeder::class
 
         ]);
     }

@@ -48,6 +48,11 @@ class Member extends Authenticatable
     public function series() {
         return $this->hasMany(Series::class);
     }
+
+    public function bookMarkSeries(){
+        return $this->belongsToMany(Series::class);
+    }
+
 }
 
 // かにえび
