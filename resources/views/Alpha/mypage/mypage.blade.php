@@ -3,9 +3,9 @@
         <h1 class='block text-xl text-amber-600 dark:text-gray-300 mb-[20px] underline mt-[15px]'>マイページ</h1>
 
         <div>
-            <p>ようこそ{{$member->name}}さん</p>
+            <p>ようこそ<span class="text-amber-600">{{$member->name}}</span>さん</p>
             <p>
-                <a href="/mypage/{{$member->id}}/edit" class="inline-flex items-center text-sm font-light text-blue-600 dark:text-blue-500 hover:underline">
+                <a href="/mypage/editMember" class="inline-flex items-center text-sm font-light text-blue-600 dark:text-blue-500 hover:underline">
                     プロフィール編集
                     <svg class="w-4 h-4 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

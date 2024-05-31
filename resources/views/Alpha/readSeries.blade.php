@@ -1,4 +1,3 @@
-<h2>{{ $series->title }}のエピソード一覧</h2>
 <a href="/index">トップページ</a>
 
 @guest
@@ -10,6 +9,9 @@
     <a href="/logout">ログアウト</a>
 @endauth
 <a href="/search">検索ページ</a>
+
+<h2>{{ $series->title }}のエピソード一覧</h2>
+<img src="{{ asset(session('img_path')) }}" width="200px" height="auto" alt="{{ $series->title }}の表紙画像">
 
 @if ($episodes->count() > 0)
 
@@ -30,9 +32,8 @@
     <p>{{ $episode->series->abstract }}</p>
     <h4>ジャンル</h4>
     @foreach ($episode->series->genres as $genre)
-        {{ $genre->name }}
+        {{ $genre->name }}　
     @endforeach
-    {{ $episode->series->cover_image_path }}
 
     <table border="1">
         <tr>
@@ -43,7 +44,7 @@
         @foreach ($episodes as $episode)
             <tr>
                 <td><a href="/read/{{ $episode->series_id }}/{{ $episode->id }}">{{ $episode->subtitle }}</a></td>
-                <td>{{ strlen($episode->episode_text) }}</td>
+                <td>{{ Str::length($episode->episode_text) }}</td>
             </tr>
         @endforeach
     </table>
