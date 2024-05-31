@@ -58,7 +58,7 @@ Route::post('/mypage/{member_id}/editEpisode/{episode_id}/delete', [MypageEpisod
 
 Route::get('/index', [AlphaController::class, 'index'])->name('index');
 
-Route::get('/read/{series_id}', [AlphaController::class, 'readSeries']);
+Route::get('/read/{series_id}', [AlphaController::class, 'readSeries'])->name('readSeries');
 Route::get('/read/{series_id}/{episode_id}', [AlphaController::class, 'readEpisode']);
 
 Route::get('/search', [AlphaController::class, 'showSearchingPage']);
