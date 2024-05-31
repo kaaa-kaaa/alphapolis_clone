@@ -34,6 +34,12 @@ Route::middleware('auth')->group(function () {
     //edit
     Route::get('/mypage/{member_id}/editSeries/{series_id}',[mypageSeriesController::class, 'showSeriesEditingPage'])->name('editSeries');
     Route::post('/mypage/{member_id}/editSeries/{series_id}',[mypageSeriesController::class, 'editSeries']);
+
+    //ユーザ情報編集
+    Route::get('/mypage/editMember', [mypageSeriesController::class, 'showEditMember']);
+    Route::post('/mypage/editMember', [mypageSeriesController::class, 'editMember']);
+    Route::get('/mypage/editMember/changePass', [mypageSeriesController::class, 'showChangePass']);
+    Route::post('/mypage/editMember/changePass', [mypageSeriesController::class, 'changePass']);
 });
 
 require __DIR__.'/auth.php';
