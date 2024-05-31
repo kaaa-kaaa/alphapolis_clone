@@ -3,7 +3,7 @@
         <h1 class="mb-[20px] text-2xl text-amber-600 mt-5">📙{{ $series->title }}のエピソード一覧</h1>
         @if ($episodes->count() > 0)
             @if($cover_path != null)
-                <img src="{{ asset(session('img_path')) }}" class="w-[200px]" alt="{{ $series->title }}の表紙画像">
+                <img src="{{ asset(session('img_path')) }}" class="w-[200px] mx-auto mb-5" alt="{{ $series->title }}の表紙画像">
             @endif
 
             <form action="{{route('bookMark')}}" method="post">

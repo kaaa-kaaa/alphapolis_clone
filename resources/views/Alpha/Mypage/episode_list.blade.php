@@ -13,6 +13,7 @@
         </div>
     </div>
 
+
     <div class='mx-auto w-[70%] relative overflow-x-auto shadow-md sm:rounded-lg'>
         @if ($series->episodes->count() > 0)
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
