@@ -62,9 +62,12 @@ class AlphaController extends Controller
     {
         $keyword = $request->input('keyword');
         if (!empty($keyword)) {
-            $series = Series::where('title', 'LIKE', "%{$keyword}%")->select('id','title')->get();
-
-        }
+            $members = Member::where('name', 'LIKE', "%{$keyword}%")->select('id')->get();
+            $members_s = $members->toArray();
+            // dd($members_s);
+            $series = Series::where('title', 'LIKE', "%{$keyword}%")->select('id','member_id','title')
+                ->orWhereIn('member_id', $members_s)->get();
+            }
         return view('Alpha.search', compact('series'));
     }
 

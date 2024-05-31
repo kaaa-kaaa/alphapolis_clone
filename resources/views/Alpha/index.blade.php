@@ -24,13 +24,11 @@
             <tr>
                 <td><a href="/read/{{ $novel->id }}">{{ $novel->title }}</a></td>
                 <td><a href="/index/{{ $novel->member_id }}">{{ $novel->member->name }}</a></td>
-                {{-- @dd($novel->genres) --}}
                 <td>
                     @foreach ($novel->genres as $genre)
                         {{ $genre->name }}<br>
                     @endforeach
                 </td>
-                {{-- <td>{{ $novel->pivot->genres->name }}</td> --}}
             </tr>
         @endif
         @endforeach
