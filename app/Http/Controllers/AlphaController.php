@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Series;
 use App\Models\Episode;
 use App\Models\Member;
@@ -21,6 +22,7 @@ class AlphaController extends Controller
 
     public function readSeries($s_id)
     {
+
         $file_path = Series::where('id',$s_id)->select('cover_image_path')->get();
         $path = $file_path->toArray();
         $cover_path = $path[0]['cover_image_path'];
