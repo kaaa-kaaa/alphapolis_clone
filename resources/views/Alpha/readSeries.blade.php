@@ -11,7 +11,9 @@
 <a href="/search">検索ページ</a>
 
 <h2>{{ $series->title }}のエピソード一覧</h2>
+@if($cover_path != null)
 <img src="{{ asset(session('img_path')) }}" width="200px" height="auto" alt="{{ $series->title }}の表紙画像">
+@endif
 
 @if ($episodes->count() > 0)
     <h4>著：{{ $episode->series->member->name }}</h4>

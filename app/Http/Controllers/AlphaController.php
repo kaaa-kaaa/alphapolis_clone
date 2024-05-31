@@ -33,11 +33,11 @@ class AlphaController extends Controller
             return view('Alpha.notFound');
         }
         else{
-            return view('Alpha.readSeries', compact('episodes','episode', 'series'));
+            return view('Alpha.readSeries', compact('episodes','episode', 'series', 'cover_path', ));
             }
     }
 
-    public function readEpisodes($s_id, $e_id)
+    public function readEpisode($s_id, $e_id)
     {
         $episodes = Episode::find($e_id);
         if(is_null($episodes)){
