@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
+use Illuminate\View\View;
+
 use App\Models\Member;
 use App\Models\Series;
 use App\Models\Genre;
@@ -212,4 +217,92 @@ class mypageSeriesController extends Controller
             return redirect($url);
         }
     }
+
+    public function showEditMember(){
+        $member_id=Auth::id();
+        $memberInfo = Member::find($member_id);
+        return view('Alpha.Mypage.editMember',compact('memberInfo'));
+    }
+
+    public function editMember(Request $request){
+        $member_id=Auth::id();
+        $memberInfo = Member::find($member_id);
+
+        //dd($memberInfo->toArray(),$request->toArray());
+        $memberInfoArray = $memberInfo->toArray();
+        $requestArray = $request->toArray();
+        if($memberInfoArray['email'] == $requestArray['email']){
+            //dd($request);
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required'],
+            ]);
+
+            // if ($request->has('back')){
+            //     return redirect('/mypage/editMember');
+            // }
+
+            $memberInfo->name = $request->name;
+            //$memberInfo->email = $request->email;
+        }else{
+            //dd($request);
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Member::class],
+            ]);
+
+            if ($request->has('back')){
+                return redirect('/mypage/editMember');
+            }
+
+            $memberInfo->name = $request->name;
+            $memberInfo->email = $request->email;
+        }
+
+        $memberInfo->save();
+
+        return redirect('/mypage');
+    }
+
+        // $user = Member::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        // ]);
+
+        //event(new Registered($user));
+
+        //Auth::login($user);
+        public function showChangePass(){
+            return view('Alpha.Mypage.changePass');
+        }
+
+        public function changePass(Request $request){
+            $member_id=Auth::id();
+            $memberInfo = Member::find($member_id);
+
+            $memberInfoArray = $memberInfo->toArray();
+            $requestArray = $request->toArray();
+
+            if($requestArray['pass'] == $requestArray['pass_conf']){
+                //dd($requestArray['pass'],$requestArray['pass_conf']);
+                $request->validate([
+                    'pass' => ['required', 'string', 'min:8'],
+                ]);
+
+                if ($request->has('back')){
+                    return redirect('/mypage/editMember');
+                }
+
+                $memberInfo->password = Hash::make($request->pass);
+
+                $memberInfo->save();
+
+                return redirect('/mypage');
+            }else{
+                //dd($requestArray['pass_conf'],$requestArray['pass']);
+                return redirect('/mypage/editMember/changePass')->with('message', '※パスワードが一致しません');
+            }
+        }
+
 }
