@@ -39,11 +39,27 @@ class BookMarkController extends Controller
         return redirect()->route('readSeries', ['series_id' => $book_mark_series_id]);
     }
 
-    public function removeBookMark() {
-        $member_id = Auth::id();
+    public function removeBookMark(Request $request) {
+        $login_member_id = Auth::id();
 
-        $member = Member::find($member_id);
+        $book_mark_series_id = $request->series_id;
 
-        return view('Alpha.Mypage.bookMarkList', compact('member'));
+        $delete_bookMark = Member_Series::where([
+            ['member_id', '=', $login_member_id],
+            ['series_id', '=', $book_mark_series_id],
+        ])->limit(1)->get();
+
+        if($delete_bookMark->isEmpty()){
+            return redirect()->route('readSeries', ['series_id' => $book_mark_series_id]);
+        }
+
+        $delete_bookMark = Member_Series::where([
+            ['member_id', '=', $login_member_id],
+            ['series_id', '=', $book_mark_series_id],
+        ])->first();
+
+        $delete_bookMark->delete();
+
+        return redirect()->route('readSeries', ['series_id' => $book_mark_series_id]);
     }
 }
