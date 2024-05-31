@@ -8,6 +8,8 @@ use App\Http\Controllers\MypageEpisodeController;
 
 use App\Http\Controllers\AlphaController;
 
+use App\Http\Controllers\BookMarkController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -49,9 +51,18 @@ Route::post('/mypage/{member_id}/editEpisode/{episode_id}/delete', [MypageEpisod
 
 
 Route::get('/index', [AlphaController::class, 'index'])->name('index');
-Route::get('/read/{series_id}', [AlphaController::class, 'readSeries']);
+Route::get('/read/{series_id}', [AlphaController::class, 'readSeries'])->name('readSeries');
 Route::get('/read/{series_id}/{episode_id}', [AlphaController::class, 'readEpisodes']);
 Route::get('/search', [AlphaController::class, 'showSearchingPage']);
 Route::post('/search', [AlphaController::class, 'search']);
 Route::get('/notfound', [AlphaController::class, 'notFoundS']);
 Route::get('/index/{member_id}', [AlphaController::class, 'memberSeries']);
+
+// ブックマーク関連
+Route::post('/mypage/bookMark', [BookMarkController::class, 'bookMark'])
+->name('bookMark')
+->middleware('auth');
+
+Route::post('/mypage/removeBookMark', [BookMarkController::class, 'removeBookMark'])
+->name('removeBookMark')
+->middleware('auth');

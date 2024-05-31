@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Series;
 use App\Models\Episode;
 use App\Models\Member;
@@ -20,6 +21,7 @@ class AlphaController extends Controller
 
     public function readSeries($s_id)
     {
+
         $episodes = Episode::where('series_id', $s_id)->where('is_release', TRUE)->get();
         $episode = Episode::where('series_id', $s_id)->first();
         $series = Series::find($s_id);

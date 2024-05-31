@@ -47,42 +47,16 @@
         <h2 class="mb-[20px]">📕ブックマーク</h2>
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th class="px-6 text-large font-medium text-black whitespace-nowrap dark:text-white"><a href="" class="inline-flex items-center text-sm font-light text-blue-600 dark:text-blue-500 underline">none</a></th>
-                </tr>
-                <tr>
-                    <td>　</td>
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th class="px-6 text-large font-medium text-black whitespace-nowrap dark:text-white"><a href="" class="inline-flex items-center text-sm font-light text-blue-600 dark:text-blue-500 underline">null</a></th>
-                </tr>
-                <tr>
-                    <td>　</td>
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th class="px-6 text-large font-medium text-black whitespace-nowrap dark:text-white"><a href="" class="inline-flex items-center text-sm font-light text-blue-600 dark:text-blue-500 underline">ない</a></th>
-                </tr>
-                <tr>
-                    <td>　</td>
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th class="px-6 text-large font-medium text-black whitespace-nowrap dark:text-white"><a href="" class="inline-flex items-center text-sm font-light text-blue-600 dark:text-blue-500 underline">時間があったら</a></th>
-                </tr>
-                <tr>
-                    <td>　</td>
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th class="px-6 text-large font-medium text-black whitespace-nowrap dark:text-white"><a href="" class="inline-flex items-center text-sm font-light text-blue-600 dark:text-blue-500 underline">作ります</a></th>
-                </tr>
-                <tr>
-                    <td>　</td>
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th class="px-6 text-large font-medium text-black whitespace-nowrap dark:text-white"><a href="" class="inline-flex items-center text-sm font-light text-blue-600 dark:text-blue-500 underline">多分</a></th>
-                </tr>
-                <tr>
-                    <td>　</td>
-                </tr>
+                @foreach ($member->bookMarkSeries as $bookMarkNovel)
+
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th class="px-6 text-large font-medium text-black whitespace-nowrap dark:text-white"><a href="/read/{{$bookMarkNovel->id}}" class="inline-flex items-center text-sm font-light text-blue-600 dark:text-blue-500 underline">{{$bookMarkNovel->title}}</a></th>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
