@@ -18,7 +18,7 @@
             </form>
             <div>
             <h2 class="mt-2 text-gray-600 text-sm">著：</h2>
-                {{ $episode->series->member->name }}
+            <p>{{ $episode->series->member->name }}</p>
 
             <h2 class="mt-2 text-gray-600 text-sm">あらすじ・紹介：</h2>
             <p>{{ $episode->series->abstract }}</p>
