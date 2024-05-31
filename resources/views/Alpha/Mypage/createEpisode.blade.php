@@ -1,4 +1,5 @@
-<h3>{{$member->name}}のページ</h3>
+
+    <h3>{{$member->name}}のページ</h3>
 <a href="/mypage/{{$member->id}}/{{$series->id}}">作成済エピソード一覧に戻る</a>
 
 <h1>エピソード作成画面</h1>
