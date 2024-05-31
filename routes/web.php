@@ -36,6 +36,12 @@ Route::middleware('auth')->group(function () {
     //edit
     Route::get('/mypage/{member_id}/editSeries/{series_id}',[mypageSeriesController::class, 'showSeriesEditingPage'])->name('editSeries');
     Route::post('/mypage/{member_id}/editSeries/{series_id}',[mypageSeriesController::class, 'editSeries']);
+
+    //ユーザ情報編集
+    Route::get('/mypage/editMember', [mypageSeriesController::class, 'showEditMember']);
+    Route::post('/mypage/editMember', [mypageSeriesController::class, 'editMember']);
+    Route::get('/mypage/editMember/changePass', [mypageSeriesController::class, 'showChangePass']);
+    Route::post('/mypage/editMember/changePass', [mypageSeriesController::class, 'changePass']);
 });
 
 require __DIR__.'/auth.php';
@@ -51,11 +57,13 @@ Route::post('/mypage/{member_id}/editEpisode/{episode_id}/delete', [MypageEpisod
 
 
 Route::get('/index', [AlphaController::class, 'index'])->name('index');
-Route::get('/read/{series_id}', [AlphaController::class, 'readSeries'])->name('readSeries');
-Route::get('/read/{series_id}/{episode_id}', [AlphaController::class, 'readEpisodes']);
+
+Route::get('/read/{series_id}', [AlphaController::class, 'readSeries']);
+Route::get('/read/{series_id}/{episode_id}', [AlphaController::class, 'readEpisode']);
+
 Route::get('/search', [AlphaController::class, 'showSearchingPage']);
 Route::post('/search', [AlphaController::class, 'search']);
-Route::get('/notfound', [AlphaController::class, 'notFoundS']);
+Route::get('/notfound', [AlphaController::class, 'notFound']);
 Route::get('/index/{member_id}', [AlphaController::class, 'memberSeries']);
 
 // ブックマーク関連

@@ -1,40 +1,38 @@
-<h2>シリーズ一覧</h2>
-
-@guest
-    <a href="/login">ログイン</a>
-    <a href="/register">会員登録</a>
-@endguest
-@auth
-    <a href="/mypage">マイページ</a>
-    <a href="/logout">ログアウト</a>
-@endauth
-<a href="/search">検索ページ</a>
-
-
-@if ($series->count() > 0)
-    <table border="1">
-        <tr>
-            <th>シリーズ名</th>
-            <th>著者</th>
-            <th>ジャンル</th>
-        </tr>
-        {{-- @foreach ディレクティブで、1件ずつ処理 --}}
-        @foreach ($series as $novel)
-        @if ($novel->episodes->count() > 0)
-            <tr>
-                <td><a href="/read/{{ $novel->id }}">{{ $novel->title }}</a></td>
-                <td><a href="/index/{{ $novel->member_id }}">{{ $novel->member->name }}</a></td>
-                {{-- @dd($novel->genres) --}}
-                <td>
-                    @foreach ($novel->genres as $genre)
-                        {{ $genre->name }}<br>
-                    @endforeach
-                </td>
-                {{-- <td>{{ $novel->pivot->genres->name }}</td> --}}
-            </tr>
-        @endif
-        @endforeach
-    </table>
-@else
-    <p>小説がありません</p>
-@endif
+<x-mypageWrap>
+    <div class='text-center mx-auto'>
+        <div class='mx-auto w-[55%] relative overflow-x-auto shadow-md sm:rounded-lg'>
+            <img src="{{ asset('images/used_site/title.png') }}">
+            @if ($series->count() > 0)
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead>
+                        <th class="mb-[20px] text-lg text-amber-600">　📙投稿作品</th>
+                    </thead>
+                    <td>　</td>
+                    <tbody>
+                        @foreach ($series as $novel)
+                            @if ($novel->episodes->count() > 0)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <th class="px-6 text-large font-medium text-black whitespace-nowrap dark:text-white"><a href="/read/{{ $novel->id }}" class="inline-flex items-center text-sm font-light text-blue-600 dark:text-blue-500 underline">{{$novel->title}}</a></th>
+                                </tr>
+                                <tr>
+                                    <td class="px-6"><a href="/index/{{ $novel->member_id }}" class="underline">{{ $novel->member->name }}</a></td>
+                                    <td class="px-6">
+                                        ジャンル：
+                                        @foreach ($novel->genres as $genre)
+                                            {{ $genre->name }},
+                                        @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>　</td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <h2 class="text-lg mr-5 test-gray-500">---- 投稿小説がありません ----</h2>
+            @endif
+        </div>
+    </div>
+</x-mypageWrap>

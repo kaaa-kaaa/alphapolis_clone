@@ -7,6 +7,7 @@ use App\Models\Series;
 use App\Models\Episode;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AlphaController extends Controller
 {
@@ -22,6 +23,11 @@ class AlphaController extends Controller
     public function readSeries($s_id)
     {
 
+        $file_path = Series::where('id',$s_id)->select('cover_image_path')->get();
+        $path = $file_path->toArray();
+        $cover_path = $path[0]['cover_image_path'];
+        Session::put('img_path', str_replace('public', 'storage', $cover_path));
+
         $episodes = Episode::where('series_id', $s_id)->where('is_release', TRUE)->get();
         $episode = Episode::where('series_id', $s_id)->first();
         $series = Series::find($s_id);
@@ -29,11 +35,11 @@ class AlphaController extends Controller
             return view('Alpha.notFound');
         }
         else{
-            return view('Alpha.readSeries', compact('episodes','episode', 'series'));
+            return view('Alpha.readSeries', compact('episodes','episode', 'series', 'cover_path', ));
             }
     }
 
-    public function readEpisodes($s_id, $e_id)
+    public function readEpisode($s_id, $e_id)
     {
         $episodes = Episode::find($e_id);
         if(is_null($episodes)){
@@ -64,9 +70,12 @@ class AlphaController extends Controller
     {
         $keyword = $request->input('keyword');
         if (!empty($keyword)) {
-            $series = Series::where('title', 'LIKE', "%{$keyword}%")->select('id','title')->get();
-
-        }
+            $members = Member::where('name', 'LIKE', "%{$keyword}%")->select('id')->get();
+            $members_s = $members->toArray();
+            // dd($members_s);
+            $series = Series::where('title', 'LIKE', "%{$keyword}%")->select('id','member_id','title')
+                ->orWhereIn('member_id', $members_s)->get();
+            }
         return view('Alpha.search', compact('series'));
     }
 
