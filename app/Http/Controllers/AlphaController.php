@@ -6,6 +6,7 @@ use App\Models\Series;
 use App\Models\Episode;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AlphaController extends Controller
 {
@@ -20,6 +21,11 @@ class AlphaController extends Controller
 
     public function readSeries($s_id)
     {
+        $file_path = Series::where('id',$s_id)->select('cover_image_path')->get();
+        $path = $file_path->toArray();
+        $cover_path = $path[0]['cover_image_path'];
+        Session::put('img_path', str_replace('public', 'storage', $cover_path));
+
         $episodes = Episode::where('series_id', $s_id)->where('is_release', TRUE)->get();
         $episode = Episode::where('series_id', $s_id)->first();
         $series = Series::find($s_id);
